@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:shopping/home_screen.dart';
 import 'package:shopping/signup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreenView extends StatefulWidget {
   const LoginScreenView({super.key});
@@ -16,6 +19,19 @@ class _LoginScreenViewState extends State<LoginScreenView> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final url = Uri.parse('https://add24.in/api/api.php');
+    final response = await http.get(url);
+    final List<dynamic> data = json.decode(response.body);
+    print(data);
+  }
 
   Future<void> LoginButton() async{
     if (formKey.currentState!.validate()) {

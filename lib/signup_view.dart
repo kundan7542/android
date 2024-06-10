@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:shopping/login_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class SignupView extends StatefulWidget {
   const SignupView({super.key});
@@ -40,13 +43,44 @@ class _SignupViewState extends State<SignupView> {
       }
 
       else{
-        Get.to(LoginScreenView());
+        final response = await http.post(
+          Uri.parse('https://add24.in/api/insert.php'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'name': name, 'email': email, 'password': password}),
+        );
+
+        final responseData = jsonDecode(response.body);
+
+        // Clear the form fields if the submission is successful
+        if (responseData['message'] != 'User added successfully')
+        {
+          const snackdemo = SnackBar(
+            content: Text('Already Exists'),
+            backgroundColor: Colors.red,
+            elevation: 10,
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(5),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackdemo);
+         }
+
+        else {
+          const snackdemo = SnackBar(
+            content: Text('User added successfully'),
+            backgroundColor: Colors.green,
+            elevation: 10,
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.all(5),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackdemo);
+          Get.off(LoginScreenView());
+        }
       }
 
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      preferences.setString('name', name);
-      preferences.setString('email', email);
-      preferences.setString('password', password);
+      // SharedPreferences preferences = await SharedPreferences.getInstance();
+      // preferences.setString('name', name);
+      // preferences.setString('email', email);
+      // preferences.setString('password', password);
     }
   }
 

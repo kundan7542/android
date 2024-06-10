@@ -74,6 +74,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
 
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                         decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Search.....',
+                          prefixIcon: Container(
+                             child: Icon(Icons.search),
+                          ),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
               SizedBox(height: MediaQuery.of(context).size.height*0.01,),
                 Container(
