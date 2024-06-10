@@ -20,29 +20,21 @@ class _LoginScreenViewState extends State<LoginScreenView> {
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    final url = Uri.parse('https://add24.in/api/api.php');
-    final response = await http.get(url);
-    final List<dynamic> data = json.decode(response.body);
-    print(data);
-  }
-
   Future<void> LoginButton() async{
     if (formKey.currentState!.validate()) {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      final name = preferences.getString('name');
-      final password = preferences.getString('password');
 
-      final enterUsername = nameController.text;
-      final enterPassword = passwordController.text;
+      final email = nameController.text;
+      final password = passwordController.text;
 
-      if(name==enterUsername && password==enterPassword){
+      final response = await http.post(
+        Uri.parse('https://add24.in/api/login.php'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
+
+      final responseData = jsonDecode(response.body);
+
+      if(responseData['message'] == 'Login successful.'){
         Get.to(HomeScreen());
       }
       else{
