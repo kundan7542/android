@@ -1,7 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,117 +8,289 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> imgList = [
-    'assets/banner1.png', // Replace with your image URLs or asset paths
-    'assets/banner2.png',
+  LinearGradient gradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0Xffe0deeb),
+      Color(0xFF9690c0),
+    ],
+  );
+
+  List<String> list = [
+    'All',
+    'Living Room',
+    'Bedroom',
+    'Kitchen',
+    'Bathroom',
+    'Office',
+    'Hotel'
   ];
 
+  var light = true;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
         child: Scaffold(
-          backgroundColor: Color(0xfff7f7f7),
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white
-                      ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: Image.asset('assets/menu.png', height: MediaQuery.of(context).size.height*0.03,),
-                        ),
-                    ),
-
-                    Text('Home', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: gradient,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Manage Home', style: TextStyle(fontSize: 12)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.white
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(7.0),
-                              child: Image.asset('assets/cart.png', height: MediaQuery.of(context).size.height*0.03,),
-                            ),
+                          Text('Hey,'),
+                          SizedBox(
+                            width: 10,
                           ),
-
-                          SizedBox(width: 10,),
-
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.white
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(7.0),
-                              child: Image.asset('assets/profile.png', height: MediaQuery.of(context).size.height*0.03,),
-                            ),
+                          Text(
+                            'Gautam',
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                  ],
-                ),
-              ),
-
-
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Search.....',
-                          prefixIcon: Container(
-                             child: Icon(Icons.search),
-                          ),
-                        ),
-
+                      Image.asset(
+                        'assets/profile.webp',
+                        height: MediaQuery.of(context).size.height * 0.04,
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/6563276.webp',
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('motion'),
+                                  Text(
+                                    '75%',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: 1,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color:
+                                Colors.grey, // You can customize the color here
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/energy.webp',
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('energy'),
+                                  Text(
+                                    '65%',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: 1,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color:
+                                Colors.grey, // You can customize the color here
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/temp.webp',
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('temp'),
+                                  Text(
+                                    '24°C',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: MediaQuery.of(context).size.height*0.02),
+
+
+
+              Container(
+                height: MediaQuery.of(context).size.height*0.06,
+                child:   ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length,
+                  itemBuilder: (context, count){
+                    return  Container(
+                      margin: EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: count == 0 ? Colors.black : Colors.white,
+                      ),
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: MediaQuery.of(context).size.width*0.2, // Minimum width of 15
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(' ' + list[count] + ' ', style: TextStyle(color: count == 0 ? Colors.white : Colors.black,),),
+                              ],
+                            ),
+                          ),
+                       ),
+                    );
+                  },
                 ),
               ),
 
-              SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                Container(
-                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CarouselSlider(
-                    options: CarouselOptions(
-                      height: 200.0,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      viewportFraction: 1.0,  // Show only one image in the frame
+SizedBox(height: 25,),
+
+
+                  GridView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: BouncingScrollPhysics(
+                        parent:
+                        AlwaysScrollableScrollPhysics()),
+                    shrinkWrap: true,
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 1.3,
                     ),
-                    items: imgList.map((item) => Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                        child: Image.asset(item, fit: BoxFit.cover),
-                      ),
-                    )).toList(),
+                    itemCount: 4,
+                    itemBuilder:
+                        (BuildContext context, int index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFf1f0f6),
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset('assets/9799404.png',
+                                      height: MediaQuery.of(context).size.height*0.04,
+                                    ),
+                                    SizedBox(width: MediaQuery.of(context).size.width*0.27),
+                                    Icon(Icons.wifi, size: 15,)
+                                  ],
+                                ),
+
+
+                                Text('Smart Lightning', style: TextStyle(fontWeight: FontWeight.bold),),
+                                Text('Bedroom'),
+
+                                const Divider(
+                                  height: 20,
+                                  thickness: 1,
+                                  indent: 20,
+                                  endIndent: 0,
+                                  color: Colors.black,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Off'),
+                                    InkWell(
+                                      onTap: (){
+                                        setState(() {
+                                          light = !light;
+                                        });
+
+
+                                        print(light);
+                                      },
+                                      child: Image.asset(light!=true?'assets/121124.png':'assets/786385.png',height: MediaQuery.of(context).size.height*0.03),
+                                    )
+
+
+                                  ],
+                                )
+                              ],
+                            )
+                        ),
+                      );
+                    },
                   ),
-                               ),
-               ),
 
 
-            ],
+
+                ],
+              ),
+            ),
           ),
         ),
-
+      ),
     );
   }
 }
