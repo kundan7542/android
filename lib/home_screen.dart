@@ -260,7 +260,7 @@ SizedBox(height: 25,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('Off'),
+                                    Text(light!=true?'Off':'On'),
                                     InkWell(
                                       onTap: (){
                                         setState(() {
